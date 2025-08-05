@@ -6,11 +6,12 @@ import UploadDocument from './components/UploadDocument';
 import ListDocuments from './components/ListDocuments';
 import ChatHistory from './components/ChatHistory';
 import ChatSpace from './components/ChatSpace';
+import './index.css';
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-cream-beige">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<UploadDocument />} />
