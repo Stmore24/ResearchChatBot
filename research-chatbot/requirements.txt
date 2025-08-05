@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+aiofiles
+python-multipart
+langchain
+openai
+requests
+PyMuPDF
