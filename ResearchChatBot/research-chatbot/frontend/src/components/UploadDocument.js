@@ -38,7 +38,6 @@ const UploadDocument = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
       // Check if there's an error in the response (duplicate file)
       if (response.data.error) {
         setError(`${response.data.error} Document ID: ${response.data.doc_id}`);
@@ -49,22 +48,22 @@ const UploadDocument = () => {
       } else {
         // Successful upload
         setMessage('Upload successful! Document processed and ready for chat. Redirecting...');
+=======
+      if (response.data.error) {
+        setError(`Document already exists, refer ID: ${response.data.doc_id}`);
+      } else {
+        setMessage('Upload successful! Redirecting to chat...');
         setTimeout(() => {
           navigate(`/chat/${response.data.doc_id}`);
         }, 2000);
       }
     } catch (err) {
-      console.error('Upload error:', err);
-      if (err.response && err.response.data) {
-        setError(`Upload failed: ${err.response.data.error || 'Unknown error'}`);
-      } else {
-        setError('Upload failed. Please check your connection and try again.');
-      }
     } finally {
       setUploading(false);
     }
   };
 
+<<<<<<< HEAD
   const handleDragOver = (event) => {
     event.preventDefault();
   };
@@ -117,6 +116,33 @@ const UploadDocument = () => {
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
               >
+=======
+  return (
+    <div className="min-h-screen bg-cream-beige">
+      <div className="container mx-auto px-6 py-12">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-8">
+            <button
+              onClick={() => navigate('/')}
+              className="mb-6 text-charcoal hover:text-deep-brown transition-colors duration-300"
+            >
+              ← Back to Dashboard
+            </button>
+            <h1 className="text-4xl font-bold text-deep-brown mb-4">
+              Upload Document
+            </h1>
+            <p className="text-xl text-charcoal">
+              Upload a PDF document to start analyzing and chatting
+            </p>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-lg p-8 border border-warm-grey">
+            <div className="mb-6">
+              <label className="block text-deep-brown text-lg font-semibold mb-4">
+                Select Document
+              </label>
+              <div className="border-2 border-dashed border-warm-grey rounded-lg p-8 text-center">
+>>>>>>> 9840faa7aa2680735263520b7ef828afb3e15601
                 <input
                   type="file"
                   accept=".pdf"
@@ -128,6 +154,7 @@ const UploadDocument = () => {
                   htmlFor="file-upload"
                   className="cursor-pointer flex flex-col items-center"
                 >
+<<<<<<< HEAD
                   <div className="text-7xl mb-6 group-hover:scale-110 transition-transform duration-300">
                     📄
                   </div>
@@ -157,10 +184,31 @@ const UploadDocument = () => {
                       </p>
                     </div>
                   </div>
+=======
+                  <div className="text-6xl mb-4">📎</div>
+                  <p className="text-charcoal text-lg mb-2">
+                    Click to select a PDF file
+                  </p>
+                  <p className="text-soft-brown">
+                    or drag and drop your file here
+                  </p>
+                </label>
+              </div>
+              
+              {file && (
+                <div className="mt-4 p-4 bg-light-tan rounded-lg">
+                  <p className="text-deep-brown">
+                    <strong>Selected:</strong> {file.name}
+                  </p>
+                  <p className="text-charcoal">
+                    Size: {(file.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+>>>>>>> 9840faa7aa2680735263520b7ef828afb3e15601
                 </div>
               )}
             </div>
 
+<<<<<<< HEAD
             {/* Messages */}
             {message && (
               <div className="mb-6 p-5 bg-gradient-to-r from-emerald-50 to-green-50 border border-emerald-200 text-emerald-800 rounded-xl flex items-center">
@@ -168,10 +216,16 @@ const UploadDocument = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 <div className="font-medium">{message}</div>
+=======
+            {message && (
+              <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                {message}
+>>>>>>> 9840faa7aa2680735263520b7ef828afb3e15601
               </div>
             )}
 
             {error && (
+<<<<<<< HEAD
               <div className="mb-6 p-5 bg-gradient-to-r from-red-50 to-rose-50 border border-red-200 text-red-800 rounded-xl flex items-start">
                 <svg className="w-6 h-6 mr-3 mt-0.5 text-red-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -231,6 +285,20 @@ const UploadDocument = () => {
                 </div>
               </div>
             </div>
+=======
+              <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                {error}
+              </div>
+            )}
+
+            <button
+              onClick={handleUpload}
+              disabled={!file || uploading}
+              className="w-full bg-golden-yellow hover:bg-amber disabled:bg-warm-grey disabled:cursor-not-allowed text-deep-brown font-semibold py-4 px-6 rounded-lg transition-colors duration-300 text-lg"
+            >
+              {uploading ? 'Uploading...' : 'Upload Document'}
+            </button>
+>>>>>>> 9840faa7aa2680735263520b7ef828afb3e15601
           </div>
         </div>
       </div>
