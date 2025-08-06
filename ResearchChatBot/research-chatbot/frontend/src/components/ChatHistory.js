@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { fetchChatHistory, fetchDocument } from '../path/to/your/functions';
+
 
 const ChatHistory = () => {
   const [documents, setDocuments] = useState([]);
@@ -13,9 +15,11 @@ const ChatHistory = () => {
   const [searchParams] = useSearchParams();
   const docIdFromUrl = searchParams.get('doc_id');
 
-  useEffect(() => {
-    fetchDocuments();
-  }, []);
+ useEffect(() => {
+  fetchChatHistory();
+  fetchDocument();
+}, [fetchChatHistory, fetchDocument]);
+
 
   useEffect(() => {
     if (docIdFromUrl && documents.length > 0) {
